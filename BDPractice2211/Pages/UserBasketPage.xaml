@@ -1,0 +1,42 @@
+﻿<Page x:Class="BDPractice2211.Pages.UserBasketPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BDPractice2211.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserBasketPage" Background="White">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="111*"/>
+            <ColumnDefinition Width="289*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <ListView x:Name="ListOfMaterials" SelectionChanged="ListOfMaterialsSelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel ToolTip="{Binding Info}">
+                            <Image Source="{Binding BytePhoto}" Width="150"></Image>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <StackPanel>
+            <ListView x:Name="UsersMaterials">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel ToolTip="{Binding Info}">
+                            <Image Source="{Binding BytePhoto}" Width="150"></Image>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

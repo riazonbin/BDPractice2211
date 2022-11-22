@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDPractice2211", "\NAS36D451\user-domain$\stud\202010\Desktop\projects\BDPractice2211\BDPractice2211\BDPractice2211.csproj", "{43C7BD51-6912-493F-9784-C2E66423A09B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43C7BD51-6912-493F-9784-C2E66423A09B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43C7BD51-6912-493F-9784-C2E66423A09B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43C7BD51-6912-493F-9784-C2E66423A09B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43C7BD51-6912-493F-9784-C2E66423A09B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6FDE806-F6F7-4989-94C6-6D2D92926631}
+	EndGlobalSection
+EndGlobal
