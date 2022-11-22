@@ -1,6 +1,7 @@
 ﻿using BDPractice2211.ADOApp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,18 +24,19 @@ namespace BDPractice2211.Pages
     {
         public Login login;
         public List<Basket> UsersBasket { get; set; }
-        public List<Material> materialsList { get; set; }
+        public List<Material> materialsList = new List<Material>();
 
         public UserBasketPage(Login login)
         {
             this.login = login;
             InitializeComponent();
             ListOfMaterials.ItemsSource = App.Connection.Material.ToList();
-            UsersBasket = App.Connection.Basket.Where(x => x.User_Id == login.Id).ToList();
+            UsersBasket = App.Connection.Basket.Where(x => x.User_Id == login.User_Id).ToList();
             foreach (var item in UsersBasket)
             {
                 materialsList.Add(App.Connection.Material.Where(x => x.Id == item.Material_Id).FirstOrDefault());
             }
+            UsersMaterials.ItemsSource = materialsList;
         }
 
         private void ListOfMaterialsSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,10 +50,10 @@ namespace BDPractice2211.Pages
             };
 
             App.Connection.Basket.Add(newBasket);
-
             App.Connection.SaveChanges();
 
-
+            materialsList.Add(mat);
+            UsersMaterials.Items.Refresh();
         }
     }
 }

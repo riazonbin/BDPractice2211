@@ -26,17 +26,19 @@
             </ListView>
         </StackPanel>
 
-        <StackPanel>
-            <ListView x:Name="UsersMaterials">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel ToolTip="{Binding Info}">
-                            <Image Source="{Binding BytePhoto}" Width="150"></Image>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+        <ScrollViewer>
+            <StackPanel>
+                <ListView x:Name="UsersMaterials">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel ToolTip="{Binding Info}">
+                                <Image Source="{Binding BytePhoto}" Width="150"></Image>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
