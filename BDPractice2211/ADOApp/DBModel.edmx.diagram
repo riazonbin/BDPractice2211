@@ -4,17 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20b73860fd0d4ff99fe73f2d50263a57" Name="Diagram1">
-        <EntityTypeShape EntityType="BDPractice2211Model.Basket" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPractice2211Model.Login" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPractice2211Model.Material" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPractice2211Model.Role" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPractice2211Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPractice2211Model.User" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <AssociationConnector Association="BDPractice2211Model.FK_Basket_Material" ManuallyRouted="false" />
-        <AssociationConnector Association="BDPractice2211Model.FK_Basket_User" ManuallyRouted="false" />
-        <AssociationConnector Association="BDPractice2211Model.FK_Login_User" ManuallyRouted="false" />
-        <AssociationConnector Association="BDPractice2211Model.FK_User_Role" ManuallyRouted="false" />
+      <Diagram DiagramId="20b73860fd0d4ff99fe73f2d50263a57" Name="Diagram1" ZoomLevel="36">
+        <EntityTypeShape EntityType="BDPractice2211Model.Basket" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="BDPractice2211Model.Login" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="BDPractice2211Model.Material" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="BDPractice2211Model.MaterialRecept" Width="1.5" PointX="8.25" PointY="7.375" />
+        <EntityTypeShape EntityType="BDPractice2211Model.Meal" Width="1.5" PointX="8.25" PointY="11.5" />
+        <EntityTypeShape EntityType="BDPractice2211Model.Recept" Width="1.5" PointX="6" PointY="11.375" />
+        <EntityTypeShape EntityType="BDPractice2211Model.Role" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="BDPractice2211Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDPractice2211Model.User" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="BDPractice2211Model.Warehouse" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="BDPractice2211Model.WarehouseMaterial" Width="1.5" PointX="5.25" PointY="8.375" />
+        <AssociationConnector Association="BDPractice2211Model.FK_Basket_Material" />
+        <AssociationConnector Association="BDPractice2211Model.FK_Basket_User" />
+        <AssociationConnector Association="BDPractice2211Model.FK_Login_User" />
+        <AssociationConnector Association="BDPractice2211Model.FK_MaterialRecept_Material" />
+        <AssociationConnector Association="BDPractice2211Model.FK_WarehouseMaterial_Material" />
+        <AssociationConnector Association="BDPractice2211Model.FK_MaterialRecept_Recept" />
+        <AssociationConnector Association="BDPractice2211Model.FK_Meal_Recept" />
+        <AssociationConnector Association="BDPractice2211Model.FK_User_Role" />
+        <AssociationConnector Association="BDPractice2211Model.FK_WarehouseMaterial_Warehouse" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

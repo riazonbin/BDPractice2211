@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище BDPractice2211Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище BDPractice2211Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Basket">
           <Key>
             <PropertyRef Name="Basket_Id" />
@@ -29,8 +29,33 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Cost" Type="int" Nullable="false" />
-          <Property Name="Info" Type="varchar" MaxLength="50" />
+          <Property Name="Info" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="BytePhoto" Type="image" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialRecept">
+          <Key>
+            <PropertyRef Name="MaterialRecept_Id" />
+          </Key>
+          <Property Name="MaterialRecept_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Material_Id" Type="int" Nullable="false" />
+          <Property Name="Recept_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Recept_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recept">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Recept_Photo" Type="image" Nullable="false" />
+          <Property Name="Info" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -57,6 +82,21 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Role_Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WarehouseMaterial">
+          <Key>
+            <PropertyRef Name="WarehouseMaterial_Id" />
+          </Key>
+          <Property Name="Warehouse_Id" Type="int" Nullable="false" />
+          <Property Name="Material_Id" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="WarehouseMaterial_Id" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Basket_Material">
           <End Role="Material" Type="Self.Material" Multiplicity="1" />
           <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
@@ -93,6 +133,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MaterialRecept_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="MaterialRecept" Type="Self.MaterialRecept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialRecept">
+              <PropertyRef Name="Material_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialRecept_Recept">
+          <End Role="Recept" Type="Self.Recept" Multiplicity="1" />
+          <End Role="MaterialRecept" Type="Self.MaterialRecept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recept">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialRecept">
+              <PropertyRef Name="Recept_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meal_Recept">
+          <End Role="Recept" Type="Self.Recept" Multiplicity="1" />
+          <End Role="Meal" Type="Self.Meal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recept">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meal">
+              <PropertyRef Name="Recept_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -105,13 +181,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WarehouseMaterial_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="WarehouseMaterial" Type="Self.WarehouseMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseMaterial">
+              <PropertyRef Name="Material_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseMaterial_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="WarehouseMaterial" Type="Self.WarehouseMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseMaterial">
+              <PropertyRef Name="Warehouse_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище BDPractice2211ModelContainer">
           <EntitySet Name="Basket" EntityType="Self.Basket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialRecept" EntityType="Self.MaterialRecept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recept" EntityType="Self.Recept" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehouseMaterial" EntityType="Self.WarehouseMaterial" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Basket_Material" Association="Self.FK_Basket_Material">
             <End Role="Material" EntitySet="Material" />
             <End Role="Basket" EntitySet="Basket" />
@@ -124,16 +229,84 @@
             <End Role="User" EntitySet="User" />
             <End Role="Login" EntitySet="Login" />
           </AssociationSet>
+          <AssociationSet Name="FK_MaterialRecept_Material" Association="Self.FK_MaterialRecept_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialRecept" EntitySet="MaterialRecept" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialRecept_Recept" Association="Self.FK_MaterialRecept_Recept">
+            <End Role="Recept" EntitySet="Recept" />
+            <End Role="MaterialRecept" EntitySet="MaterialRecept" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meal_Recept" Association="Self.FK_Meal_Recept">
+            <End Role="Recept" EntitySet="Recept" />
+            <End Role="Meal" EntitySet="Meal" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK_WarehouseMaterial_Material" Association="Self.FK_WarehouseMaterial_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="WarehouseMaterial" EntitySet="WarehouseMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseMaterial_Warehouse" Association="Self.FK_WarehouseMaterial_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="WarehouseMaterial" EntitySet="WarehouseMaterial" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDPractice2211Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BDPractice2211Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Basket" EntityType="BDPractice2211Model.Basket" />
+          <EntitySet Name="Login" EntityType="BDPractice2211Model.Login" />
+          <EntitySet Name="Material" EntityType="BDPractice2211Model.Material" />
+          <EntitySet Name="MaterialRecept" EntityType="BDPractice2211Model.MaterialRecept" />
+          <EntitySet Name="Meal" EntityType="BDPractice2211Model.Meal" />
+          <EntitySet Name="Recept" EntityType="BDPractice2211Model.Recept" />
+          <EntitySet Name="Role" EntityType="BDPractice2211Model.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="BDPractice2211Model.sysdiagrams" />
+          <EntitySet Name="User" EntityType="BDPractice2211Model.User" />
+          <EntitySet Name="Warehouse" EntityType="BDPractice2211Model.Warehouse" />
+          <EntitySet Name="WarehouseMaterial" EntityType="BDPractice2211Model.WarehouseMaterial" />
+          <AssociationSet Name="FK_Basket_Material" Association="BDPractice2211Model.FK_Basket_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basket_User" Association="BDPractice2211Model.FK_Basket_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_User" Association="BDPractice2211Model.FK_Login_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialRecept_Material" Association="BDPractice2211Model.FK_MaterialRecept_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialRecept" EntitySet="MaterialRecept" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseMaterial_Material" Association="BDPractice2211Model.FK_WarehouseMaterial_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="WarehouseMaterial" EntitySet="WarehouseMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialRecept_Recept" Association="BDPractice2211Model.FK_MaterialRecept_Recept">
+            <End Role="Recept" EntitySet="Recept" />
+            <End Role="MaterialRecept" EntitySet="MaterialRecept" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meal_Recept" Association="BDPractice2211Model.FK_Meal_Recept">
+            <End Role="Recept" EntitySet="Recept" />
+            <End Role="Meal" EntitySet="Meal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="BDPractice2211Model.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseMaterial_Warehouse" Association="BDPractice2211Model.FK_WarehouseMaterial_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="WarehouseMaterial" EntitySet="WarehouseMaterial" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Basket">
           <Key>
             <PropertyRef Name="Basket_Id" />
@@ -141,43 +314,75 @@
           <Property Name="Basket_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Material_Id" Type="Int32" Nullable="false" />
           <Property Name="User_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Material" Relationship="Self.FK_Basket_Material" FromRole="Basket" ToRole="Material" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Basket_User" FromRole="Basket" ToRole="User" />
+          <NavigationProperty Name="Material" Relationship="BDPractice2211Model.FK_Basket_Material" FromRole="Basket" ToRole="Material" />
+          <NavigationProperty Name="User" Relationship="BDPractice2211Model.FK_Basket_User" FromRole="Basket" ToRole="User" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Login1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="User_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Login_User" FromRole="Login" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="BDPractice2211Model.FK_Login_User" FromRole="Login" ToRole="User" />
         </EntityType>
         <EntityType Name="Material">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="Info" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BytePhoto" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Basket" Relationship="BDPractice2211Model.FK_Basket_Material" FromRole="Material" ToRole="Basket" />
+          <NavigationProperty Name="MaterialRecept" Relationship="BDPractice2211Model.FK_MaterialRecept_Material" FromRole="Material" ToRole="MaterialRecept" />
+          <NavigationProperty Name="WarehouseMaterial" Relationship="BDPractice2211Model.FK_WarehouseMaterial_Material" FromRole="Material" ToRole="WarehouseMaterial" />
+        </EntityType>
+        <EntityType Name="MaterialRecept">
+          <Key>
+            <PropertyRef Name="MaterialRecept_Id" />
+          </Key>
+          <Property Name="MaterialRecept_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Material_Id" Type="Int32" Nullable="false" />
+          <Property Name="Recept_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="BDPractice2211Model.FK_MaterialRecept_Material" FromRole="MaterialRecept" ToRole="Material" />
+          <NavigationProperty Name="Recept" Relationship="BDPractice2211Model.FK_MaterialRecept_Recept" FromRole="MaterialRecept" ToRole="Recept" />
+        </EntityType>
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Recept_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Recept" Relationship="BDPractice2211Model.FK_Meal_Recept" FromRole="Meal" ToRole="Recept" />
+        </EntityType>
+        <EntityType Name="Recept">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Recept_Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="Info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BytePhoto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <NavigationProperty Name="Basket" Relationship="Self.FK_Basket_Material" FromRole="Material" ToRole="Basket" />
+          <NavigationProperty Name="MaterialRecept" Relationship="BDPractice2211Model.FK_MaterialRecept_Recept" FromRole="Recept" ToRole="MaterialRecept" />
+          <NavigationProperty Name="Meal" Relationship="BDPractice2211Model.FK_Meal_Recept" FromRole="Recept" ToRole="Meal" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="BDPractice2211Model.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -188,15 +393,33 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Role_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Basket" Relationship="Self.FK_Basket_User" FromRole="User" ToRole="Basket" />
-          <NavigationProperty Name="Login" Relationship="Self.FK_Login_User" FromRole="User" ToRole="Login" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Basket" Relationship="BDPractice2211Model.FK_Basket_User" FromRole="User" ToRole="Basket" />
+          <NavigationProperty Name="Login" Relationship="BDPractice2211Model.FK_Login_User" FromRole="User" ToRole="Login" />
+          <NavigationProperty Name="Role" Relationship="BDPractice2211Model.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WarehouseMaterial" Relationship="BDPractice2211Model.FK_WarehouseMaterial_Warehouse" FromRole="Warehouse" ToRole="WarehouseMaterial" />
+        </EntityType>
+        <EntityType Name="WarehouseMaterial">
+          <Key>
+            <PropertyRef Name="WarehouseMaterial_Id" />
+          </Key>
+          <Property Name="Warehouse_Id" Type="Int32" Nullable="false" />
+          <Property Name="Material_Id" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseMaterial_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="BDPractice2211Model.FK_WarehouseMaterial_Material" FromRole="WarehouseMaterial" ToRole="Material" />
+          <NavigationProperty Name="Warehouse" Relationship="BDPractice2211Model.FK_WarehouseMaterial_Warehouse" FromRole="WarehouseMaterial" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK_Basket_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="1" />
-          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <End Type="BDPractice2211Model.Material" Role="Material" Multiplicity="1" />
+          <End Type="BDPractice2211Model.Basket" Role="Basket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Material">
               <PropertyRef Name="Id" />
@@ -207,8 +430,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Basket_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <End Type="BDPractice2211Model.User" Role="User" Multiplicity="1" />
+          <End Type="BDPractice2211Model.Basket" Role="Basket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -219,8 +442,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Login_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <End Type="BDPractice2211Model.User" Role="User" Multiplicity="1" />
+          <End Type="BDPractice2211Model.Login" Role="Login" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -230,9 +453,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MaterialRecept_Material">
+          <End Type="BDPractice2211Model.Material" Role="Material" Multiplicity="1" />
+          <End Type="BDPractice2211Model.MaterialRecept" Role="MaterialRecept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialRecept">
+              <PropertyRef Name="Material_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseMaterial_Material">
+          <End Type="BDPractice2211Model.Material" Role="Material" Multiplicity="1" />
+          <End Type="BDPractice2211Model.WarehouseMaterial" Role="WarehouseMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseMaterial">
+              <PropertyRef Name="Material_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialRecept_Recept">
+          <End Type="BDPractice2211Model.Recept" Role="Recept" Multiplicity="1" />
+          <End Type="BDPractice2211Model.MaterialRecept" Role="MaterialRecept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recept">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialRecept">
+              <PropertyRef Name="Recept_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meal_Recept">
+          <End Type="BDPractice2211Model.Recept" Role="Recept" Multiplicity="1" />
+          <End Type="BDPractice2211Model.Meal" Role="Meal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recept">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meal">
+              <PropertyRef Name="Recept_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="BDPractice2211Model.Role" Role="Role" Multiplicity="1" />
+          <End Type="BDPractice2211Model.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="Id" />
@@ -242,31 +513,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BDPractice2211Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Basket" EntityType="Self.Basket" />
-          <EntitySet Name="Login" EntityType="Self.Login" />
-          <EntitySet Name="Material" EntityType="Self.Material" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Basket_Material" Association="Self.FK_Basket_Material">
-            <End Role="Material" EntitySet="Material" />
-            <End Role="Basket" EntitySet="Basket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Basket_User" Association="Self.FK_Basket_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Basket" EntitySet="Basket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Login_User" Association="Self.FK_Login_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Login" EntitySet="Login" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        <Association Name="FK_WarehouseMaterial_Warehouse">
+          <End Type="BDPractice2211Model.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="BDPractice2211Model.WarehouseMaterial" Role="WarehouseMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseMaterial">
+              <PropertyRef Name="Warehouse_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -275,58 +534,103 @@
           <EntitySetMapping Name="Basket">
             <EntityTypeMapping TypeName="BDPractice2211Model.Basket">
               <MappingFragment StoreEntitySet="Basket">
-                <ScalarProperty Name="Basket_Id" ColumnName="Basket_Id" />
-                <ScalarProperty Name="Material_Id" ColumnName="Material_Id" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Material_Id" ColumnName="Material_Id" />
+                <ScalarProperty Name="Basket_Id" ColumnName="Basket_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Login">
             <EntityTypeMapping TypeName="BDPractice2211Model.Login">
               <MappingFragment StoreEntitySet="Login">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Login1" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login1" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Material">
             <EntityTypeMapping TypeName="BDPractice2211Model.Material">
               <MappingFragment StoreEntitySet="Material">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="BytePhoto" ColumnName="BytePhoto" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialRecept">
+            <EntityTypeMapping TypeName="BDPractice2211Model.MaterialRecept">
+              <MappingFragment StoreEntitySet="MaterialRecept">
+                <ScalarProperty Name="Recept_Id" ColumnName="Recept_Id" />
+                <ScalarProperty Name="Material_Id" ColumnName="Material_Id" />
+                <ScalarProperty Name="MaterialRecept_Id" ColumnName="MaterialRecept_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meal">
+            <EntityTypeMapping TypeName="BDPractice2211Model.Meal">
+              <MappingFragment StoreEntitySet="Meal">
+                <ScalarProperty Name="Recept_Id" ColumnName="Recept_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recept">
+            <EntityTypeMapping TypeName="BDPractice2211Model.Recept">
+              <MappingFragment StoreEntitySet="Recept">
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Recept_Photo" ColumnName="Recept_Photo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="BDPractice2211Model.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="BDPractice2211Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="BDPractice2211Model.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouse">
+            <EntityTypeMapping TypeName="BDPractice2211Model.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehouseMaterial">
+            <EntityTypeMapping TypeName="BDPractice2211Model.WarehouseMaterial">
+              <MappingFragment StoreEntitySet="WarehouseMaterial">
+                <ScalarProperty Name="WarehouseMaterial_Id" ColumnName="WarehouseMaterial_Id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Material_Id" ColumnName="Material_Id" />
+                <ScalarProperty Name="Warehouse_Id" ColumnName="Warehouse_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,43 @@
+﻿<Page x:Class="BDPractice2211.Pages.ReceptCreationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BDPractice2211.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReceptCreationPage" Background="White">
+
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Name of recept"></TextBlock>
+            <TextBox x:Name="tbNameOfIngridient"></TextBox>
+            <TextBlock Text="Choose ingridients"></TextBlock>
+            <ComboBox Name="cbIngridients">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding BytePhoto}"  Width="100"></Image>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="Add ingridient" Click="AddIngridientBtn"></Button>
+            <TextBlock Text="Total ingridients"></TextBlock>
+            <ComboBox Name="cbTotalIngridients">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding BytePhoto}" Width="100"></Image>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="Save recept!" Click="SaveReceptButton"></Button>
+            <TextBlock Text="Choose recept photo"></TextBlock>
+            <Button Content="Select" Click="ImageSelectionButtonClick"></Button>
+        </StackPanel>
+    </Grid>
+</Page>

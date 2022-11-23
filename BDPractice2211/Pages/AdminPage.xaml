@@ -18,6 +18,8 @@
             <TextBox x:Name="tbCost"></TextBox>
             <Button x:Name="btnSelect" Content="Select" Click="ImageSelectionButtonClick"></Button>
             <Button Content="Save" Click="SaveMaterialClick"></Button>
+            <Button Content="Go to recept creation page" Click="GoToReceptCreationPage"></Button>
+            <Button Content="Go to meal creation page" Click="GoToMealCreationPage"></Button>
         </StackPanel>
     </Grid>
 </Page>

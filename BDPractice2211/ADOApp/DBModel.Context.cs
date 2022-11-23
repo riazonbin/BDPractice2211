@@ -28,8 +28,13 @@ namespace BDPractice2211.ADOApp
         public virtual DbSet<Basket> Basket { get; set; }
         public virtual DbSet<Login> Login { get; set; }
         public virtual DbSet<Material> Material { get; set; }
+        public virtual DbSet<MaterialRecept> MaterialRecept { get; set; }
+        public virtual DbSet<Meal> Meal { get; set; }
+        public virtual DbSet<Recept> Recept { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Warehouse> Warehouse { get; set; }
+        public virtual DbSet<WarehouseMaterial> WarehouseMaterial { get; set; }
     }
 }

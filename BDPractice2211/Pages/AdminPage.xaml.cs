@@ -61,5 +61,15 @@ namespace BDPractice2211.Pages
                 MessageBox.Show("Только фото!", "Ошибка");
             }
         }
+
+        private void GoToReceptCreationPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ReceptCreationPage());
+        }
+
+        private void GoToMealCreationPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MealCreationPage());
+        }
     }
 }

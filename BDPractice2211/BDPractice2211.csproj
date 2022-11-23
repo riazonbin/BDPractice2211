@@ -92,6 +92,15 @@
     <Compile Include="ADOApp\Material.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOApp\MaterialRecept.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Meal.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Recept.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOApp\Role.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -99,6 +108,12 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOApp\User.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Warehouse.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\WarehouseMaterial.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -117,6 +132,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\MealCreationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ReceptCreationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +155,12 @@
     </Compile>
     <Compile Include="Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MealCreationPage.xaml.cs">
+      <DependentUpon>MealCreationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ReceptCreationPage.xaml.cs">
+      <DependentUpon>ReceptCreationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>

@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "\\NAS36D451\user-domain$\stud\202010\Desktop\projects\BDPractice2211\BDPractice2211\ADOApp\DBModel.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\202010\Desktop\projects\BDPractice2211\BDPractice2211\ADOApp\DBModel.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

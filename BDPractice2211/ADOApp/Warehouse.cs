@@ -12,27 +12,16 @@ namespace BDPractice2211.ADOApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Material
+    public partial class Warehouse
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Material()
+        public Warehouse()
         {
-            this.Basket = new HashSet<Basket>();
-            this.MaterialRecept = new HashSet<MaterialRecept>();
             this.WarehouseMaterial = new HashSet<WarehouseMaterial>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int Cost { get; set; }
-        public string Info { get; set; }
-        public byte[] BytePhoto { get; set; }
-        public int Count { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Basket> Basket { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaterialRecept> MaterialRecept { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseMaterial> WarehouseMaterial { get; set; }
     }
