@@ -30,40 +30,6 @@ namespace BDPractice2211.Pages
             InitializeComponent();
         }
 
-        private void SaveMaterialClick(object sender, RoutedEventArgs e)
-        {
-            Material material = new Material
-            {
-                Name = tbName.Text,
-                Info = tbInfo.Text,
-                BytePhoto = ImageMat,
-                Cost = Convert.ToInt32(tbCost.Text)
-            };
-
-            App.Connection.Material.Add(material);
-            App.Connection.SaveChanges();
-            MessageBox.Show("Successfully added new material!");
-            NavigationService.Navigate(new AdminPage());
-        }
-
-        private void ImageSelectionButtonClick(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var btnSelect = sender as Button;
-                OpenFileDialog dialog = new OpenFileDialog();
-                if (dialog.ShowDialog() != null)
-                {
-                    ImageMat = File.ReadAllBytes(dialog.FileName);
-                    btnSelect.Background = Brushes.Green;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Только фото!", "Ошибка");
-            }
-        }
-
         private void GoToReceptCreationPage(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ReceptCreationPage());
@@ -72,6 +38,11 @@ namespace BDPractice2211.Pages
         private void GoToMealCreationPage(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MealCreationPage());
+        }
+
+        private void GoToMaterialCreationPage(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MaterialCreationPage());
         }
     }
 }

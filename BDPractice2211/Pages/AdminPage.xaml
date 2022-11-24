@@ -20,14 +20,7 @@
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBlock Text="Name"></TextBlock>
-            <TextBox x:Name="tbName"></TextBox>
-            <TextBlock Text="Info"></TextBlock>
-            <TextBox x:Name="tbInfo"></TextBox>
-            <TextBlock Text="Cost"></TextBlock>
-            <TextBox x:Name="tbCost"></TextBox>
-            <Button x:Name="btnSelect" Content="Select" Click="ImageSelectionButtonClick"></Button>
-            <Button Content="Save" Click="SaveMaterialClick"></Button>
+            <Button Content="Go to ingridient creation page" Click="GoToMaterialCreationPage"></Button>
             <Button Content="Go to recept creation page" Click="GoToReceptCreationPage"></Button>
             <Button Content="Go to meal creation page" Click="GoToMealCreationPage"></Button>
         </StackPanel>

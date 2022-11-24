@@ -45,9 +45,9 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Content="Save recept!" Click="SaveReceptButton"></Button>
             <TextBlock Text="Choose recept photo"></TextBlock>
             <Button Content="Select" Click="ImageSelectionButtonClick"></Button>
+            <Button Content="Save recept!" Click="SaveReceptButton"></Button>
         </StackPanel>
     </Grid>
 </Page>
