@@ -42,6 +42,8 @@ namespace BDPractice2211.Pages
 
             App.Connection.Material.Add(material);
             App.Connection.SaveChanges();
+            MessageBox.Show("Successfully added new material!");
+            NavigationService.Navigate(new AdminPage());
         }
 
         private void ImageSelectionButtonClick(object sender, RoutedEventArgs e)

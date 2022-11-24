@@ -9,7 +9,17 @@
       Title="RegistrationPage" Background="White">
 
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="371*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="646*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Name"></TextBlock>
             <TextBox x:Name="tbName"></TextBox>
             <TextBlock Text="Login"></TextBlock>

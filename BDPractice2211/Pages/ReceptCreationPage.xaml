@@ -9,7 +9,17 @@
       Title="ReceptCreationPage" Background="White">
 
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="344*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="469*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Name of recept"></TextBlock>
             <TextBox x:Name="tbNameOfIngridient"></TextBox>
             <TextBlock Text="Choose ingridients"></TextBlock>

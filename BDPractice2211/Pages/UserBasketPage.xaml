@@ -13,18 +13,21 @@
             <ColumnDefinition Width="111*"/>
             <ColumnDefinition Width="289*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1">
-            <ListView x:Name="ListOfMaterials" SelectionChanged="ListOfMaterialsSelectionChanged">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel ToolTip="{Binding Info}">
-                            <Image Source="{Binding BytePhoto}" Width="150"></Image>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+
+        <ScrollViewer Grid.Column="1">
+            <StackPanel>
+                <ListView x:Name="ListOfMaterials" SelectionChanged="ListOfMaterialsSelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel ToolTip="{Binding Info}">
+                                <Image Source="{Binding BytePhoto}" Width="150"></Image>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
 
         <ScrollViewer>
             <StackPanel>
